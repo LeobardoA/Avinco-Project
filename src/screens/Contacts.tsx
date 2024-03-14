@@ -5,22 +5,24 @@ import { GlobalColors } from '../theme/GlobalTheme';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { readFile } from '../components/DatabaseManager';
 import Cliente from '../components/Cliente';
+import { useFocusEffect } from '@react-navigation/native';
 
 export const Contacts = (props: any) => {
 
     const [clientes, setClientes] = useState([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            let clientesData = await readFile("clientes.txt");
-            if (!clientesData) {
-                return;
-            }
-            setClientes(clientesData);
-        };
-
-        fetchData();
-    }, []);
+    useFocusEffect(
+        React.useCallback(() => {
+            const fetchData = async () => {
+                let clientesData = await readFile("clientes.txt");
+                if (!clientesData) {
+                    return;
+                }
+                setClientes(clientesData);
+            };
+            fetchData();
+        }, [])
+    );
 
     return (
         <View style={{

@@ -7,7 +7,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { readFile, writeFile } from '../../components/DatabaseManager'
 import Cliente from '../../components/Cliente'
 
-export const NewContact = (props: any) => {
+export const NewContact = ({ navigation }: any) => {
     const [alias, setAlias] = useState('');
     const [nombre, setNombre] = useState('');
     const [telefono, setTelefono] = useState('');
@@ -64,8 +64,7 @@ export const NewContact = (props: any) => {
 
         console.log(cliente);
         writeFile("clientes.txt", clientes);
-        console.log(clientes);
-        props.navigation.navigate('Contacts');
+        navigation.goBack();
     };
     return (
         <View style={{
