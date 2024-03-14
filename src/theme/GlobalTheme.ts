@@ -8,7 +8,8 @@ export const GlobalColors = {
     accent: '#fb8500',
     white: '#F1F1F1',
     whiteElement: '#FFFFFF',
-    textColor: 'white'
+    textColor: 'white',
+    deleteButton: 'red'
 }
 
 export const globalStyle = StyleSheet.create({

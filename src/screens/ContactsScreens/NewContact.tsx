@@ -53,12 +53,17 @@ export const NewContact = ({ navigation }: any) => {
             aalias = alias;
         }
 
-        let cliente = new Cliente(aalias, nombre, telefonoFormateado, domicilio, ccorreo);
         let clientes: Cliente[] = await readFile("clientes.txt");
 
         if (!clientes) {
             clientes = []; // Inicializa como un array vacío si no hay datos
         }
+
+        let cliente = new Cliente({ id: clientes.length, alias: aalias, correo: ccorreo, domicilio: domicilio, nombre: nombre, telefono: telefonoFormateado });
+
+        console.log("Hola?");
+        
+        console.log(cliente);
 
         clientes.push(cliente);
 
@@ -117,7 +122,7 @@ export const NewContact = ({ navigation }: any) => {
                 {/* SEPARACION */}
                 <View style={styles.infoContainer}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Text style={styles.titleText}>Correo Electronico::</Text>
+                        <Text style={styles.titleText}>Correo Electronico:</Text>
                         <Text style={[styles.titleText, { color: '#999' }]}>(Opcional)</Text>
                     </View>
                     <TextInput style={styles.textInput} placeholder='Correo' onChangeText={setCorreo} keyboardType='email-address' />

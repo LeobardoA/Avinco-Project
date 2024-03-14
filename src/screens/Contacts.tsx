@@ -3,18 +3,27 @@ import { View, Image, Text, StyleSheet, ScrollView } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { GlobalColors } from '../theme/GlobalTheme';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { readFile } from '../components/DatabaseManager';
+import { readFile, writeFile } from '../components/DatabaseManager';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import Cliente from '../components/Cliente';
-import { useFocusEffect } from '@react-navigation/native';
 
-export const Contacts = (props: any) => {
+export const Contacts = ({ navigation }: any) => {
 
-    const [clientes, setClientes] = useState([]);
+    const navigation2 = useNavigation();
+
+    const [clientes, setClientes] = useState<Cliente[]>([]);
+
+    useEffect(() => {
+        navigation.setOptions({
+            updateContactList: updateContactList
+        });
+    }, []);
 
     useFocusEffect(
         React.useCallback(() => {
             const fetchData = async () => {
                 let clientesData = await readFile("clientes.txt");
+                console.log("Nyaa");
                 if (!clientesData) {
                     return;
                 }
@@ -23,6 +32,25 @@ export const Contacts = (props: any) => {
             fetchData();
         }, [])
     );
+
+    const handleClientePress = (cliente: Cliente) => {
+        navigation.navigate('DetailsContact', { cliente, updateContactList, deleteContactList});
+    };
+
+    const updateContactList = (cliente: Cliente) => {
+        const updatedClientes = clientes.map(c => {
+            if (c.id === cliente.id) {
+                return cliente
+            }
+            return c;
+        });
+        writeFile("clientes.txt", updatedClientes);
+    };
+
+    const deleteContactList = (cliente: Cliente) => {
+        const updatedClientes = clientes.filter(c => c.id !== cliente.id);
+        writeFile("clientes.txt", updatedClientes);
+    };
 
     return (
         <View style={{
@@ -48,7 +76,9 @@ export const Contacts = (props: any) => {
             }}>
                 {clientes.map((cliente: Cliente, index) => (
                     <View style={styles.contactContainer} key={index}>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => handleClientePress(cliente)}
+                        >
                             <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{cliente.alias}</Text>
                             {cliente.alias !== cliente.nombre ? <Text>{cliente.nombre}</Text> : null}
                             <Text>{cliente.domicilio}</Text>
@@ -75,7 +105,7 @@ export const Contacts = (props: any) => {
                     borderWidth: 1,
                     elevation: 4
                 }}
-                    onPress={() => props.navigation.navigate('NewContact')}
+                    onPress={() => navigation.navigate('NewContact')}
                 >
                     <Text style={{
                         color: GlobalColors.textColor,

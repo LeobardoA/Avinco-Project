@@ -8,6 +8,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { GlobalColors } from '../theme/GlobalTheme';
 import { ToolsChecker } from '../screens/ToolsScreens/ToolsChecker';
 import NewContact from '../screens/ContactsScreens/NewContact';
+import { DetailsContact } from '../screens/ContactsScreens/DetailsContact';
 
 const Tab = createBottomTabNavigator();
 
@@ -66,6 +67,7 @@ const HomeStackNavigator = () => {
             <Stack.Screen name='Contacts' component={Contacts} />
             <Stack.Screen name='ToolsChecker' component={ToolsCheckerScreen} />
             <Stack.Screen name='NewContact' component={NewContact} />
+            <Stack.Screen name='DetailsContact' component={DetailsContact} />
         </Stack.Navigator>
     )
 }
