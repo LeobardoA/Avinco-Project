@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { View, Image, Text, StyleSheet, ScrollView, TextInput, Alert } from 'react-native'
-import { LinearGradient } from 'expo-linear-gradient'
-import { GlobalColors } from '../../theme/GlobalTheme'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import React, { useEffect, useState } from 'react';
+import { View, Image, Text, StyleSheet, ScrollView, TextInput, Alert } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { GlobalColors } from '../../theme/GlobalTheme';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { readFile } from '../../components/DatabaseManager'
-import Cliente from '../../components/Cliente'
-import { useNavigation } from '@react-navigation/native'
+import Cliente from '../../components/Cliente';
 
 export const DetailsContact = ({ navigation, route }: any) => {
     const [alias, setAlias] = useState('');

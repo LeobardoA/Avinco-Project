@@ -14,7 +14,7 @@ const Tab = createBottomTabNavigator();
 
 const ToolsCheckerScreen = () =>{
     return(
-        <ToolsChecker elements={["Caja de herramientas", "Escalera", "Hidrolavadora", "Franelas", "Manguera", "Extension", "Multimetro", "Manometros", "Kit de Arranque"]}/>
+        <ToolsChecker/>
     )
 }
 

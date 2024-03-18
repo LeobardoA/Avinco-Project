@@ -1,24 +1,32 @@
 import React, { useState } from 'react'
-import { View, Image, Text, StyleSheet, ScrollView } from 'react-native'
+import { View, Image, Text, StyleSheet, ScrollView, Alert } from 'react-native'
 import { GlobalColors } from '../../theme/GlobalTheme'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Picker } from '@react-native-picker/picker'
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
-interface Props {
-    elements: Array<string>;
-}
+export const ToolsChecker = () => {
 
-export const ToolsChecker = ({ elements }: Props) => {
+    const mantenimientoList = ["Hidrolavadora", "Franelas", "Escaleras"];
+    const instalacionList = ["Taladro", "Extensiones"];
 
-    const [checkboxStates, setCheckboxStates] = useState<boolean[]>(Array(elements.length).fill(false));
+    const [selectedValue, setSelectedValue] = useState('Mantenimiento'); // Estado para el valor seleccionado del Picker
+    const dataList = selectedValue === 'Mantenimiento' ? mantenimientoList : instalacionList; // Determinar qué lista mostrar
+
+    const [checkboxStates, setCheckboxStates] = useState<boolean[]>(Array(dataList.length).fill(false));
 
     const handleCheckboxChange = (index: number) => {
         const newCheckboxStates = [...checkboxStates];
         newCheckboxStates[index] = !newCheckboxStates[index];
         setCheckboxStates(newCheckboxStates);
     };
+
+    const checkTools = () => {
+        console.log("Hola");
+        
+        Alert.alert("Alerta", "Aun te faltan herramientas!\nSeguro que quieres salir asi a trabajar?")
+    }
 
     return (
         <View style={{
@@ -44,15 +52,14 @@ export const ToolsChecker = ({ elements }: Props) => {
                     justifyContent: 'center',
                     elevation: 2
                 }}>
-                    <Picker mode='dropdown' style={{
-                        fontWeight: "bold",
-                        fontSize: 10,
-                        width: 320
-                    }}>
+                    <Picker
+                        mode='dropdown'
+                        style={{ fontWeight: "bold", fontSize: 10, width: 320 }}
+                        selectedValue={selectedValue}
+                        onValueChange={(itemValue) => setSelectedValue(itemValue)}
+                    >
                         <Picker.Item label={'Mantenimiento'} value={'Mantenimiento'} key={0} />
-                        <Picker.Item label={'Mantenimiento'} value={'Mantenimiento1'} key={1} />
-                        <Picker.Item label={'Mantenimiento'} value={'Mantenimiento2'} key={2} />
-                        <Picker.Item label={'Mantenimiento'} value={'Mantenimiento3'} key={3} />
+                        <Picker.Item label={'Instalacion'} value={'Instalacion'} key={1} />
                     </Picker>
                 </View>
             </LinearGradient>
@@ -61,10 +68,10 @@ export const ToolsChecker = ({ elements }: Props) => {
                 flex: 1,
                 marginTop: 35
             }}>
-                {elements.map((element, index) => (
-                    <TouchableOpacity style={styles.itemContainer} onPress={() => handleCheckboxChange(index)} key={index}>
-                        <Text>{element}</Text>
-                        <FontAwesome name={checkboxStates[index] ? 'square-o' : 'check-square'} size={30} color={GlobalColors.primaryDarker} />
+                {dataList.map((item, index) => (
+                    <TouchableOpacity key={index} style={styles.itemContainer} onPress={() => handleCheckboxChange(index)}>
+                        <Text>{item}</Text>
+                        <FontAwesome name={checkboxStates[index] ? 'check-square' : 'square-o'} size={30} color={GlobalColors.primaryDarker} />
                     </TouchableOpacity>
                 ))}
             </ScrollView >
@@ -79,27 +86,20 @@ export const ToolsChecker = ({ elements }: Props) => {
                 backgroundColor: GlobalColors.whiteElement
             }}>
                 <TouchableOpacity style={{
-                    width: 200,
+                    width: 350,
                     height: 50,
                     backgroundColor: GlobalColors.accent,
                     borderRadius: 25,
                     alignItems: 'center',
                     justifyContent: 'center',
-                }}>
+                }}
+                onPress={()=>checkTools()}
+                >
                     <Text style={{
                         color: 'white',
                         fontSize: 18,
                         fontWeight: 'bold'
                     }}>Revisar</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.footerBtn}>
-                    <FontAwesome name='plus' size={35} color='#FFF' />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.footerBtn}>
-                    <FontAwesome name='trash-o' size={35} color='#FFF' />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.footerBtn}>
-                    <FontAwesome name='pencil-square-o' size={35} color='#FFF' />
                 </TouchableOpacity>
             </View>
         </View >

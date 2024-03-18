@@ -1,5 +1,4 @@
 import * as FileSystem from 'expo-file-system';
-import Cliente from './Cliente';
 
 const path = FileSystem.documentDirectory;
 

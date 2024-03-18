@@ -8,9 +8,6 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import Cliente from '../components/Cliente';
 
 export const Contacts = ({ navigation }: any) => {
-
-    const navigation2 = useNavigation();
-
     const [clientes, setClientes] = useState<Cliente[]>([]);
 
     useEffect(() => {
