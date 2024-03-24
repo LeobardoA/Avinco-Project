@@ -8,8 +8,8 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 export const ToolsChecker = () => {
 
-    const mantenimientoList = ["Hidrolavadora", "Franelas", "Escaleras"];
-    const instalacionList = ["Taladro", "Extensiones"];
+    const mantenimientoList = ["Caja de Herramientas", "Multimetro", "Asperzor", "Hidrolavadora", "Manguera verde", "Extension Electrica", "Franelas", "Manometros", "Escaleras", "Cinta gris", "Bolsa de Plastico", "Aspiradora", "Adaptador 410", "Control Remoto", "Contactor 220V", "Cinchos", "Kit de Arranque", "Casco y Chaleco"];
+    const instalacionList = ["Nivel", "Taladro", "Brocas", "Escaleras", "Cinta Gris", "Abrazaderas de tuberia", "Lapiz y Marcador", "Bomba de Vario","Extension Electrica", "Manometros", "Pericas", "Cinseles, Marro y Martillo", "Pistola de Temperatura", "Terminales Electricas", "Pedacera de Armaflex", "Plantillas para Instalacion", "Cemento"];
 
     const [selectedValue, setSelectedValue] = useState('Mantenimiento'); // Estado para el valor seleccionado del Picker
     const dataList = selectedValue === 'Mantenimiento' ? mantenimientoList : instalacionList; // Determinar qué lista mostrar
@@ -23,9 +23,15 @@ export const ToolsChecker = () => {
     };
 
     const checkTools = () => {
-        console.log("Hola");
-        
-        Alert.alert("Alerta", "Aun te faltan herramientas!\nSeguro que quieres salir asi a trabajar?")
+        let missingTools: string[] = [];
+        checkboxStates.forEach((item, index) => {
+            if (!item) {
+                missingTools.push(dataList[index]);
+                return;
+            }
+        });
+        const missingToolsMessage = missingTools.join('\n');
+        Alert.alert("Falta Herramienta", "Aun no has cargado:\n" + missingToolsMessage);
     }
 
     return (
@@ -93,7 +99,7 @@ export const ToolsChecker = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}
-                onPress={()=>checkTools()}
+                    onPress={() => checkTools()}
                 >
                     <Text style={{
                         color: 'white',
