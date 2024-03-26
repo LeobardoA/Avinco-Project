@@ -5,102 +5,16 @@ import { LinearGradient } from "expo-linear-gradient";
 import { GlobalColors } from "../theme/GlobalTheme";
 import * as Print from 'expo-print';
 import { shareAsync } from 'expo-sharing';
-import { Asset } from 'expo-asset';
-import { manipulateAsync } from 'expo-image-manipulator';
-
-async function generateHTML() {
-  const asset = Asset.fromModule(require('../images/logo.png'));
-  const image = await manipulateAsync(asset.localUri ?? asset.uri, [], { base64: true });
-  return `<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Reporte De Servicio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-  </head>
-  <body>
-    <div class="hoja-a4">
-      <!-- CONTENIDO -->
-      <div class="container">
-        <!-- HEADER -->
-        <div class="header">
-          <!-- Logo -->
-          <div
-            style="
-              flex-direction: row;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              width: 6cm;
-              height: 2cm;
-            "
-          >
-            <img
-              src="data:image/png;base64,${image.base64}"
-              style="width: 2cm; height: 2cm; margin-right: 0.2cm"
-            />
-            <div
-              style="
-                display: flex;
-                flex-direction: column;
-                height: 2cm;
-                justify-content: center;
-              "
-            >
-              <p
-                style="
-                  color: #ff8800;
-                  font-size: 2em;
-                  margin: 0;
-                  font-weight: bold;
-                "
-              >
-                AVINCO
-              </p>
-              <p
-                style="
-                  color: #3949ab;
-                  font-size: 0.6em;
-                  margin: 0;
-                  font-weight: bold;
-                "
-              >
-                AVI, Instalaciones Climáticas de Occidente S de R.L. de CV.
-              </p>
-            </div>
-          </div>
-        </div>
-        <!-- SERVICES -->
-        <div class="services">
-          <h1>SERVICES</h1>
-        </div>
-        <!-- FOOTER -->
-        <div class="footer">
-          <h1>FOOTER</h1>
-        </div>
-      </div>
-      <!-- TRIANGULOS [NO TOCAR] -->
-      <div class="tl_triangle">
-        <div class="tl_triangle_border"></div>
-      </div>
-      <div class="br_triangle">
-        <div class="br_triangle_border"></div>
-      </div>
-    </div>
-  </body>
-</html>
-`;
-}
+import { getHTML, setHTML } from "../components/DatabaseManager";
 
 export const Home = (props: any) => {
   const printToFile = async () => {
-    console.log(generateHTML);
-    const html = await generateHTML();
+    const html: any = getHTML();
+    // await Print.printAsync({ html });
     const { uri } = await Print.printToFileAsync({ html });
-    console.log('File has been saved to:', uri);
-    await shareAsync(uri, { UTI: '.pdf', mimeType: 'application/pdf' });
+    const lastUri : any = await setHTML("prueba1.pdf", uri);
+    const opcionesCompartir = { UTI: '.pdf', mimeType: 'application/pdf', dialogTitle: 'Compartir Archivo'};
+    await shareAsync(lastUri, opcionesCompartir);
   };
   return (
     <View

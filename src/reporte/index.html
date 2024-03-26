@@ -1,80 +1,333 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Reporte De Servicio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-  </head>
-  <body>
-    <div class="hoja-a4">
-      <!-- CONTENIDO -->
-      <div class="container">
-        <!-- HEADER -->
-        <div class="header">
-          <!-- Logo -->
-          <div
-            style="
-              flex-direction: row;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              width: 6cm;
-              height: 2cm;
-            "
-          >
-            <img
-              src="logo.png"
-              style="width: 2cm; height: 2cm; margin-right: 0.2cm"
-            />
-            <div
-              style="
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Reporte De Servicio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    @page {
+      margin: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      padding: 0;
+      margin: 0;
+    }
+
+    .hoja-a4 {
+      width: 21.59cm;
+      height: 27.94cm;
+      margin: 0 auto;
+      box-sizing: border-box;
+      background-color: white;
+      position: relative;
+      border-color: black;
+      border-width: 1px;
+      border-style: solid;
+    }
+
+    .tl_triangle {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 3cm 3cm 0 0;
+      border-color: #000342 transparent transparent transparent;
+      /* Establecer el ancho del borde para que se aplique el gradiente */
+      position: absolute;
+      /* Cambiar a posición absoluta */
+      top: 0;
+      left: 0;
+    }
+
+    .br_triangle {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 0 3cm 3cm;
+      border-color: transparent transparent #4d0000 transparent;
+      /* Establecer el ancho del borde para que se aplique el gradiente */
+      position: absolute;
+      /* Cambiar a posición absoluta */
+      bottom: 0;
+      right: 0;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 50;
+      position: relative;
+      z-index: 1;
+      width: 21.59cm;
+      /* Ancho */
+      height: 27.94cm;
+      /* Largo/Alto */
+    }
+
+    .header {
+      display: flex;
+      width: 100%;
+      height: 5cm;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      top: 0;
+    }
+
+    .services {
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 90%;
+    }
+
+    .logo {
+      flex-direction: row;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 6cm;
+      height: 2cm;
+      position: absolute;
+      top: 0.25cm;
+      left: 2.5cm;
+    }
+
+    .meta-data {
+      flex-direction: row;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      width: 8.5cm;
+      height: 2cm;
+      position: absolute;
+      top: 0.25cm;
+      right: 1.5cm;
+      border-color: black;
+      border-width: 1px;
+      border-radius: 15px;
+      border-style: solid;
+      overflow: hidden;
+    }
+
+    .meta-data-title-tab {
+      display: flex;
+      flex-direction: column;
+      color: white;
+      height: 100%;
+      border-right-width: 1px;
+      border-right-style: solid;
+      border-right-color: black;
+    }
+
+    .meta-data-title-content {
+      background-color: #000561;
+      margin: 0;
+      text-align: center;
+      height: 0.5cm;
+      font-size: 0.4cm;
+    }
+
+    .date-container {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    .date-container div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .date-container p {
+      margin: 0;
+      color: black;
+      font-size: 0.4cm;
+    }
+
+    .date-container h2 {
+      color: white;
+      margin: 0;
+      font-size: 0.45cm;
+      font-weight: bold;
+      background-color: #3949ab;
+      padding-left: 0.3cm;
+      padding-right: 0.3cm;
+      padding-top: 0.1cm;
+      padding-bottom: 0.1cm;
+      border-radius: 12px;
+    }
+
+    .client-data-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      top: 2.5cm;
+      width: 90%;
+      height: 2.5cm;
+      position: absolute;
+      overflow: hidden;
+    }
+
+    .client-data-container div {
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .client-data-container p {
+      margin: 0px;
+      color: black;
+      font-size: 0.5cm;
+    }
+
+    .client-data-container h2 {
+      margin: 0px;
+      font-size: 0.5cm;
+      font-weight: normal;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+      padding-left: 0.4cm;
+    }
+
+    .footer {
+      display: flex;
+      width: 100%;
+      height: 3cm;
+      justify-content: center;
+      align-items: end;
+    }
+
+    .footer-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 80%;
+      margin-bottom: 0.5cm;
+    }
+
+    .footer-info pre {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 3px;
+      font-size: 0.35cm;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hoja-a4">
+    <!-- CONTENIDO -->
+    <div class="container">
+      <!-- HEADER -->
+      <div class="header">
+        <!-- Logo -->
+        <div class="logo">
+          <img src="../images/logo.png" style="width: 2cm; height: 2cm; margin-right: 0.2cm" />
+          <div style="
                 display: flex;
                 flex-direction: column;
                 height: 2cm;
                 justify-content: center;
-              "
-            >
-              <p
-                style="
+              ">
+            <p style="
                   color: #ff8800;
                   font-size: 2em;
                   margin: 0;
                   font-weight: bold;
-                "
-              >
-                AVINCO
-              </p>
-              <p
-                style="
+                ">
+              AVINCO
+            </p>
+            <p style="
                   color: #3949ab;
                   font-size: 0.6em;
                   margin: 0;
                   font-weight: bold;
-                "
-              >
-                AVI, Instalaciones Climáticas de Occidente S de R.L. de CV.
-              </p>
-            </div>
+                ">
+              AVI, Instalaciones Climáticas de Occidente S de R.L. de CV.
+            </p>
           </div>
         </div>
-        <!-- SERVICES -->
-        <div class="services">
-          <h1>SERVICES</h1>
+        <!-- META DATA [Fecha y eso pueh...]-->
+        <div class="meta-data">
+          <div class="meta-data-title-tab" style="width: 5.5cm;">
+            <p class="meta-data-title-content">Fecha:</p>
+            <div class="date-container">
+              <div>
+                <p>Dia</p>
+                <h2>88</h2>
+              </div>
+              <div>
+                <p>Mes</p>
+                <h2>88</h2>
+              </div>
+              <div>
+                <p>Año</p>
+                <h2>88</h2>
+              </div>
+            </div>
+          </div>
+          <div class="meta-data-title-tab" style="width: 3cm;">
+            <p class="meta-data-title-content">No. de Reporte</p>
+            <p style="
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+            color: red;
+            font-weight: bold;
+            font-size: 22px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            height: auto;
+            ">0001</p>
+          </div>
         </div>
-        <!-- FOOTER -->
-        <div class="footer">
-          <h1>FOOTER</h1>
+        <!-- CLIENT DATA -->
+        <div class="client-data-container">
+          <div>
+            <p>Cliente:</p>
+            <h2 style="width: 12cm;">Consultorio De Imagen</h2>
+            <p>Tel:</p>
+            <h2 style="width: 6cm;">+52 33 3357 4587</h2>
+          </div>
+          <div>
+            <p>Domicilio:</p>
+            <h2 style="width: 20cm;">Tarascos #3500A</h2>
+          </div>
         </div>
       </div>
-      <!-- TRIANGULOS [NO TOCAR] -->
-      <div class="tl_triangle">
-        <div class="tl_triangle_border"></div>
+      <!-- SERVICES -->
+      <div class="services">
+        
       </div>
-      <div class="br_triangle">
-        <div class="br_triangle_border"></div>
+      <!-- FOOTER -->
+      <div class="footer">
+        <div class="footer-info">
+          <pre>www.avinco.com.mx   Tel: (33) 3604 2630 y 3604 6139   Cel.33 3196 3497</pre>
+          <pre>administracion@avinco.com.mx     ingenieriadeconfort@hotmail.com</pre>
+          <pre>Esther Tapia de Castellanos #3717   Col. Beatriz Hernández, Guadalajara, Jalisco.</pre>
+        </div>
       </div>
     </div>
-  </body>
+    <!-- TRIANGULOS [NO TOCAR] -->
+    <div class="tl_triangle">
+      <div class="tl_triangle_border"></div>
+    </div>
+    <div class="br_triangle">
+      <div class="br_triangle_border"></div>
+    </div>
+  </div>
+</body>
+
 </html>
