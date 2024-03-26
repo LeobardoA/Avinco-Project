@@ -9,7 +9,7 @@ import { getHTML, setHTML } from "../components/DatabaseManager";
 
 export const Home = (props: any) => {
   const printToFile = async () => {
-    const html: any = getHTML();
+    const html: any = await getHTML();
     // await Print.printAsync({ html });
     const { uri } = await Print.printToFileAsync({ html });
     const lastUri : any = await setHTML("prueba1.pdf", uri);
