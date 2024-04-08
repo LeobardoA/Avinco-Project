@@ -3,12 +3,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../screens/Home';
 import Contacts from '../screens/Contacts';
-import History from '../screens/History';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { GlobalColors } from '../theme/GlobalTheme';
 import { ToolsChecker } from '../screens/ToolsScreens/ToolsChecker';
 import NewContact from '../screens/ContactsScreens/NewContact';
 import { DetailsContact } from '../screens/ContactsScreens/DetailsContact';
+import { NewService } from '../screens/ServiceScreens/NewService';
 
 const Tab = createBottomTabNavigator();
 
@@ -47,13 +47,6 @@ const BottomTabNavigator = () => {
                         <FontAwesome name='home' size={35} color={GlobalColors.primaryDarker} />
                     )
                 }} />
-            <Tab.Screen name="History"
-                component={History}
-                options={{
-                    tabBarLabel: "History", tabBarLabelStyle: { marginBottom: 5 }, tabBarIcon: ({ color, size }) => (
-                        <FontAwesome name='history' size={30} color={GlobalColors.primaryDarker} />
-                    )
-                }} />
         </Tab.Navigator>
     )
 }
@@ -68,6 +61,7 @@ const HomeStackNavigator = () => {
             <Stack.Screen name='ToolsChecker' component={ToolsCheckerScreen} />
             <Stack.Screen name='NewContact' component={NewContact} />
             <Stack.Screen name='DetailsContact' component={DetailsContact} />
+            <Stack.Screen name='NewService' component={NewService} />
         </Stack.Navigator>
     )
 }

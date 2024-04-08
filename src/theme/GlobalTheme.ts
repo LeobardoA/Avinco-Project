@@ -1,6 +1,16 @@
 import { StyleSheet } from "react-native";
 
 export const GlobalColors = {
+    // primary: '#3949AB',
+    // primaryLight: '#E8EAF6',
+    // primaryDarker: '#283593',
+    // secondary: '#1282a2',
+    // accent: '#fb8500',
+    // white: '#444',
+    // whiteElement: '#888',
+    // textColor: 'white',
+    // deleteButton: 'red'
+
     primary: '#3949AB',
     primaryLight: '#E8EAF6',
     primaryDarker: '#283593',

@@ -9,7 +9,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 export const ToolsChecker = () => {
 
     const mantenimientoList = ["Caja de Herramientas", "Multimetro", "Asperzor", "Hidrolavadora", "Manguera verde", "Extension Electrica", "Franelas", "Manometros", "Escaleras", "Cinta gris", "Bolsa de Plastico", "Aspiradora", "Adaptador 410", "Control Remoto", "Contactor 220V", "Cinchos", "Kit de Arranque", "Casco y Chaleco"];
-    const instalacionList = ["Nivel", "Taladro", "Brocas", "Escaleras", "Cinta Gris", "Abrazaderas de tuberia", "Lapiz y Marcador", "Bomba de Vario","Extension Electrica", "Manometros", "Pericas", "Cinseles, Marro y Martillo", "Pistola de Temperatura", "Terminales Electricas", "Pedacera de Armaflex", "Plantillas para Instalacion", "Cemento"];
+    const instalacionList = ["Nivel", "Taladro", "Brocas", "Escaleras", "Cinta Gris", "Abrazaderas de tuberia", "Lapiz y Marcador", "Bomba de Vario", "Extension Electrica", "Manometros", "Pericas", "Cinseles, Marro y Martillo", "Pistola de Temperatura", "Terminales Electricas", "Pedacera de Armaflex", "Plantillas para Instalacion", "Cemento"];
 
     const [selectedValue, setSelectedValue] = useState('Mantenimiento'); // Estado para el valor seleccionado del Picker
     const dataList = selectedValue === 'Mantenimiento' ? mantenimientoList : instalacionList; // Determinar qué lista mostrar
@@ -62,7 +62,10 @@ export const ToolsChecker = () => {
                         mode='dropdown'
                         style={{ fontWeight: "bold", fontSize: 10, width: 320 }}
                         selectedValue={selectedValue}
-                        onValueChange={(itemValue) => setSelectedValue(itemValue)}
+                        onValueChange={(itemValue) => {
+                            setSelectedValue(itemValue);
+                            setCheckboxStates(Array(dataList.length).fill(false));
+                        }}
                     >
                         <Picker.Item label={'Mantenimiento'} value={'Mantenimiento'} key={0} />
                         <Picker.Item label={'Instalacion'} value={'Instalacion'} key={1} />

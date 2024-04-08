@@ -20,7 +20,6 @@ export const Contacts = ({ navigation }: any) => {
         React.useCallback(() => {
             const fetchData = async () => {
                 let clientesData = await readFile("clientes.txt");
-                console.log("Nyaa");
                 if (!clientesData) {
                     return;
                 }

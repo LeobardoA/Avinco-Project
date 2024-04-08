@@ -3,19 +3,9 @@ import { Image, Text, View, StyleSheet, Share } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import { GlobalColors } from "../theme/GlobalTheme";
-import * as Print from 'expo-print';
-import { shareAsync } from 'expo-sharing';
-import { getHTML, setHTML } from "../components/DatabaseManager";
 
 export const Home = (props: any) => {
-  const printToFile = async () => {
-    const html: any = await getHTML();
-    // await Print.printAsync({ html });
-    const { uri } = await Print.printToFileAsync({ html });
-    const lastUri : any = await setHTML("prueba1.pdf", uri);
-    const opcionesCompartir = { UTI: '.pdf', mimeType: 'application/pdf', dialogTitle: 'Compartir Archivo'};
-    await shareAsync(lastUri, opcionesCompartir);
-  };
+  
   return (
     <View
       style={{
@@ -52,7 +42,7 @@ export const Home = (props: any) => {
         }}
       >
         <TouchableOpacity
-          onPress={printToFile}
+          onPress={() => props.navigation.navigate("NewService")}
           // onPress={() => props.navigation.navigate("History")}
           style={styles.btnHome}
         >

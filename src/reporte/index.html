@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="ES">
 
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Reporte De Servicio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     @page {
       margin: 0;
@@ -19,7 +16,6 @@
 
     .hoja-a4 {
       width: 21.59cm;
-      height: 27.94cm;
       margin: 0 auto;
       box-sizing: border-box;
       background-color: white;
@@ -60,13 +56,10 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      width: 50;
+      width: 50px;
       position: relative;
       z-index: 1;
       width: 21.59cm;
-      /* Ancho */
-      height: 27.94cm;
-      /* Largo/Alto */
     }
 
     .header {
@@ -76,7 +69,7 @@
       justify-content: center;
       align-items: center;
       flex-direction: row;
-      top: 0;
+      top: 0px;
     }
 
     .services {
@@ -221,6 +214,91 @@
       font-family: Arial, Helvetica, sans-serif;
       margin: 3px;
       font-size: 0.35cm;
+    }
+
+    .serviceContainer {
+      border-radius: 25px;
+      border-width: 3px;
+      border-color: #666;
+      border-style: solid;
+      padding-left: 0.5cm;
+      padding-right: 0.5cm;
+      margin-top: 0.5cm;
+      margin-bottom: 0.5cm;
+    }
+
+    .serviceRowContainer {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .serviceRowInputContainer {
+      display: flex;
+      flex-direction: row;
+      padding-left: 0.2cm;
+      padding-right: 0.2cm;
+      margin: 0px;
+    }
+
+    .serviceRowInputLine {
+      display: flex;
+      align-items: end;
+      justify-content: start;
+      flex: 1;
+      border-bottom-style: solid;
+      border-bottom-width: 3px;
+      margin-left: 0.2cm;
+      margin-top: 0px;
+      margin-bottom: 15px;
+      padding-left: 0.6cm;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid #222;
+      text-align: center;
+      padding: 4px;
+    }
+
+    th {
+      background-color: #BBB;
+    }
+
+    .tableContainer {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+
+    .checkers {
+      margin-top: 0.5cm;
+      font-size: 16px;
+    }
+
+    .checkersItemContainer {
+      display: flex;
+      flex-direction: row;
+      flex: 3;
+      justify-content: space-between;
+      padding-right: 10px;
+    }
+
+    .checkersItemContainer p {
+      margin: 5px 0px 5px 0px;
+    }
+
+    .checkerCheck {
+      display: flex;
+      border-width: 1px;
+      border-style: solid;
+      justify-content: center;
+      align-items: center;
+      width: 0.6cm;
+      height: 0.6cm;
     }
   </style>
 </head>
