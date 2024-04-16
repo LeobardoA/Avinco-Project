@@ -73,7 +73,7 @@ export const Home = (props: any) => {
           style={styles.btnHome}
         >
           <Image
-            source={require("../images/toolsList.jpeg")}
+            source={require("../images/toolsList.jpg")}
             resizeMode="stretch"
             style={{
               width: "90%",
